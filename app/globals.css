@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
 :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
   --background: #ffffff;
   --foreground: #171717;
+  --zoom-factor: 1;
 }
 
 @theme inline {
@@ -14,13 +18,113 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #171717;
+    --foreground: #ffffff;
   }
+}
+
+/* Definição de tamanhos de fonte base para todos os elementos */
+html {
+  font-size: 16px;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Estilos de acessibilidade para tamanhos de fonte */
+body.font-size-normal {
+  font-size: 16px;
+  --zoom-factor: 1;
+}
+
+body.font-size-large {
+  font-size: 20px;
+  --zoom-factor: 1.25;
+}
+
+body.font-size-x-large {
+  font-size: 24px;
+  --zoom-factor: 1.5;
+}
+
+/* Configuração para garantir que elementos herdem o tamanho de fonte */
+body.font-size-normal *,
+body.font-size-large *,
+body.font-size-x-large * {
+  font-size: inherit;
+}
+
+/* Garantir que spans em cards apareçam em linhas separadas */
+.card-content span {
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* Garantir que spans em cards apareçam em linhas separadas */
+.rt-Card span {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* Adicionar mais espaço entre textos em cards */
+.rt-Card .rt-Text {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Espaçamento entre textos agrupados */
+.rt-Card div > span + span,
+.rt-Card p + p {
+  margin-top: 0.5rem;
+}
+
+/* Solução específica para card de métricas */
+.rt-Card .rt-Flex .rt-Box span {
+  display: block;
+}
+
+/* Garantir que textos nos cards de acesso rápido tenham quebras */
+.bg-white .flex .space-y-1 span {
+  display: block;
+}
+
+/* Espaçamento entre textos nos cards */
+.rt-Text {
+  margin-bottom: 0.5rem;
+}
+
+.rt-Heading + .rt-Text {
+  margin-top: 0.5rem;
+}
+
+/* Mais espaço entre elementos dentro dos cards */
+.rt-Card .rt-Flex {
+  gap: 0.75rem;
+}
+
+/* Melhorar espaçamento vertical entre elementos de cards */
+.rt-Card > div {
+  margin-bottom: 0.5rem;
+}
+
+/* Evitar que textos fiquem grudados em cards */
+.rt-Card p + p,
+.rt-Card .rt-Text + .rt-Text {
+  margin-top: 0.5rem;
+}
+
+/* Estilos específicos para melhorar a acessibilidade */
+button:focus, a:focus {
+  outline: 2px solid #2F855A;
+  outline-offset: 2px;
+}
+
+@media (forced-colors: active) {
+  /* Estilos para modo de alto contraste do sistema */
+  button, a {
+    forced-color-adjust: none;
+  }
 }
