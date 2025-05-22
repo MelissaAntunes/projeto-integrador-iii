@@ -15,8 +15,6 @@ import {
   LuDownload, 
   LuEye, 
   LuArrowDownUp, 
-  LuTrash2,
-  LuFolderOpen,
   LuStar,
   LuClock
 } from 'react-icons/lu';
@@ -492,7 +490,7 @@ export default function DocumentsPage() {
                 <div className="text-center space-y-4">
                   <DocumentTypeIcon type={selectedDocument.type} />
                   <Text size="3" weight="medium">Visualização não disponível</Text>
-                  <Text size="2" color="gray">Clique em "Baixar" para abrir o documento em seu dispositivo</Text>
+                  <Text size="2" color="gray">Clique em &quot;Baixar&quot; para abrir o documento em seu dispositivo</Text>
                   <Button 
                     variant="solid" 
                     className="bg-green-600 text-white mt-4"
