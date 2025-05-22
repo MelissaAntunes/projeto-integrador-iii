@@ -1,6 +1,7 @@
 "use client";
-
-import { TextField, Button, TextArea } from '@radix-ui/themes'
+import { useState } from 'react';
+import { TextField, Button, TextArea, Callout } from '@radix-ui/themes'
+import { InfoCircledIcon } from '@radix-ui/react-icons';
 import "easymde/dist/easymde.min.css"
 import { useForm, Controller } from "react-hook-form"
 import axios from "axios"
@@ -19,12 +20,26 @@ interface companyForm {
 const NewCompanyPage = () => {
     const router = useRouter();
     const {register, control, handleSubmit} = useForm<companyForm>();
+    const [error, setError] = useState('');
 
   return (
-    <form className='max-w-xl space-y-3' 
+    <div className='max-w-xl '> 
+        {error && <Callout.Root color="red" className='mb-5'>
+                        <Callout.Icon>
+                            <InfoCircledIcon />
+                        </Callout.Icon>
+                        <Callout.Text>{error}</Callout.Text>
+                    </Callout.Root>}
+
+    <form className='space-y-3' 
     onSubmit={handleSubmit(async (data) => {
-        await axios.post('/api/companies', data);
-        router.push('/companies');
+        try {
+            await axios.post('/api/companies', data);
+            router.push('/companies');
+        } catch {
+            setError('Error adding a company');
+        }
+        
     })}>
         <TextField.Root placeholder="Name" {...register('name')} />
         <TextField.Root placeholder="Logo URL" {...register('logo_url')} />
@@ -40,6 +55,7 @@ const NewCompanyPage = () => {
 
         <Button>Add new company</Button>
     </form>
+    </div>
   )
 }
 
