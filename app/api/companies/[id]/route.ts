@@ -4,9 +4,9 @@ import { createCompanySchema } from "@/app/validationSchemas";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
-  const id = params.id;
+  const id = context.params.id;
 
   try {
     console.log(`Buscando empresa com ID: ${id}`);
@@ -36,9 +36,9 @@ export async function GET(
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
-  const id = params.id;
+  const id = context.params.id;
   
   try {
     console.log(`Atualizando empresa com ID: ${id}`);
