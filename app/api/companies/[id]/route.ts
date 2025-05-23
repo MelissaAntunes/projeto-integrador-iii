@@ -4,10 +4,9 @@ import { createCompanySchema } from "@/app/validationSchemas";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: Promise<string> | string } }
+  { params }: { params: { id: string } }
 ) {
-  // Extrair o id dos parâmetros com await
-  const id = typeof params.id === 'string' ? params.id : await params.id;
+  const id = params.id;
 
   try {
     console.log(`Buscando empresa com ID: ${id}`);
@@ -37,10 +36,9 @@ export async function GET(
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: Promise<string> | string } }
+  { params }: { params: { id: string } }
 ) {
-  // Extrair o id dos parâmetros com await
-  const id = typeof params.id === 'string' ? params.id : await params.id;
+  const id = params.id;
   
   try {
     console.log(`Atualizando empresa com ID: ${id}`);
@@ -109,4 +107,4 @@ export async function PATCH(
       { status: 500 }
     );
   }
-} 
+}
