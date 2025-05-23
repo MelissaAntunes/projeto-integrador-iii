@@ -2,11 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma/client";
 import { createCompanySchema } from "@/app/validationSchemas";
 
+// Configure the segment behavior
+export const dynamic = 'auto';
+export const dynamicParams = true;
+
 export async function GET(
-  request: NextRequest,
-  context: { params: { id: string } }
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const id = context.params.id;
+  const { id } = await params;
 
   try {
     console.log(`Buscando empresa com ID: ${id}`);
@@ -35,10 +39,10 @@ export async function GET(
 }
 
 export async function PATCH(
-  request: NextRequest,
-  context: { params: { id: string } }
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const id = context.params.id;
+  const { id } = await params;
   
   try {
     console.log(`Atualizando empresa com ID: ${id}`);
